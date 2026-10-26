@@ -40,6 +40,7 @@ src/
   apps/traces.js   Spec 2
   apps/framing.js  Spec 3
 sim/               synthetic generators with planted effects (herding, attacks, framing bias)
+scripts/           seed-sweep.js (robustness sweep over seed offsets)
 examples/          runnable demos; 00_claims_check.js checks the spec's claims
 test/              node --test suites
 docs/spec.md       the specification
@@ -48,11 +49,13 @@ docs/notes.md      working notes: status, decisions, next steps (read before con
 
 ## Milestones
 1. **Core**: `src/kernels.js`, `src/info.js`, `src/monitor.js` and tests. Port
-   `examples/00_claims_check.js` into tests.
-2. **Spec 2 first**: it has the cleanest synthetic ground truth. Simulator →
-   detector → precision/recall against an n-gram baseline.
-3. **Spec 1**: agent-based market simulator with a herding knob, then a replay of
-   public crypto L2 data.
+   `examples/00_claims_check.js` into tests. *(done)*
+2. **Spec 1 first** (owner's choice): agent-based market simulator with a herding
+   knob → `src/apps/market.js` → precision/recall/lead against realised
+   volatility and order-book imbalance *(synthetic stage done)*; then a replay of
+   public crypto L2 data, with VPIN as a third baseline.
+3. **Spec 2**: service-trace simulator → detector → precision/recall against an
+   n-gram baseline.
 4. **Spec 3**: framing auditor on a split-ballot simulator, then on public survey microdata.
 5. Write-up: what each metric caught, what it missed, and how it compares with the baselines.
 
@@ -60,5 +63,7 @@ docs/notes.md      working notes: status, decisions, next steps (read before con
 ```bash
 npm install
 node examples/00_claims_check.js
+node examples/01_market_herding.js [seed]
 npm test    # node --test: runs test/*.test.js
+node scripts/seed-sweep.js 51   # rerun the suite with every seed shifted by k·7919
 ```
