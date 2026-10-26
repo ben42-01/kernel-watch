@@ -1,0 +1,19 @@
+{
+  "name": "kernel-watch",
+  "version": "1.0.0",
+  "description": "Markov-kernel monitors for event streams, built on conscious-agent",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node --test",
+    "claims": "node examples/00_claims_check.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "conscious-agent": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
